@@ -7,14 +7,16 @@ const input = document.querySelector("#controls input");
 const box = document.querySelector("div#boxes");
 
 function createBoxes(amount) {
-	destroyBoxes();
+	//destroyBoxes();
 	const divs = [];
 	const width = 30;
 	const height = 30;
+
 	for (let i = 0; i < amount; i += 1) {
 		const color = getRandomHexColor();
 		const div = document.createElement("div");
-		div.style = `width:${width + 10 * i}px; height:${height + 10 * i}px; background-color:${color};`;
+		let sizeI = i + box.childNodes.length;
+		div.style = `width:${width + 10 * sizeI}px; height:${height + 10 * sizeI}px; background-color:${color};`;
 		divs.push(div);
 	}
 	box.append(...divs);
@@ -27,6 +29,8 @@ function destroyBoxes() {
 }
 
 createButton.addEventListener("click", function () {
-	createBoxes(input.value);
+	const number = Number.parseInt(input.value);
+	input.value = "";
+	createBoxes(number);
 });
 destroyButton.addEventListener("click", destroyBoxes);
